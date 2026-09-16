@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كوفي فينو | Coffee Veno</title>
+    <!-- Modern Arabic & English Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #0b1120;
+            --bg-card: rgba(30, 41, 59, 0.6);
+            --bg-item: rgba(255, 255, 255, 0.03);
+            --accent: #fbbf24; /* Amber/Gold */
+            --accent-glow: rgba(251, 191, 36, 0.25);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(251, 191, 36, 0.08), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.08), transparent 30%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 60px 20px 20px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
+        .logo-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 0 15px var(--accent-glow));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, #fbbf24, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 10px 30px rgba(251, 191, 36, 0.1);
+        }
+
+        .subtitle-en {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 8px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: -5px;
+            margin-bottom: 30px;
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            margin-bottom: 30px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 15s ease-out;
+        }
+
+        .hero-banner:hover img {
+            transform: scale(1.08);
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(11, 18, 32, 0.1) 0%,
+                rgba(11, 18, 32, 0.4) 40%,
+                rgba(11, 18, 32, 0.85) 80%,
+                rgba(11, 18, 32, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        .tagline {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+            background: rgba(30, 41, 59, 0.4);
+            padding: 12px 35px;
+            border-radius: 50px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: pulse-glow 3s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 10px var(--accent-glow); }
+            100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 25px var(--accent-glow); }
+        }
+
+        /* --- TABBED NAVIGATION MENU --- */
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 22px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        /* Active Tab Styling */
+        .nav-link.active {
+            background: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px var(--accent-glow);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* --- BADGES --- */
+        .info-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+
+        .badge {
+            background: var(--bg-card);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .badge:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--accent-glow);
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        /* --- SPECIAL OFFER --- */
+        .special-offer {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(251, 191, 36, 0.02));
+            border: 2px solid var(--accent);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px var(--accent-glow);
+            animation: glow-pulse 3s infinite alternate;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px var(--accent-glow); }
+            100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(251, 191, 36, 0.4); }
+        }
+
+        .special-offer h2 {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .special-offer p {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .special-price {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 25px var(--accent);
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+
+        /* --- MENU GRID --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            transition: all 0.4s ease;
+        }
+
+        .menu-grid.single-view {
+            grid-template-columns: 1fr;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- CATEGORY CARDS --- */
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 25px;
+            backdrop-filter: blur(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-card.hidden {
+            display: none;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
+            border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-header h3 {
+            font-size: 1.6rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 10px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .category-hero {
+            position: relative;
+            height: 160px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .category-card:hover .category-img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        .category-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, var(--bg-card), transparent);
+        }
+
+        /* --- MENU ITEMS GRID LAYOUT --- */
+        .menu-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px 10px;
+            background: var(--bg-item);
+            border-radius: 20px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(251, 191, 36, 0.3);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .item-img-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .menu-item:hover .item-img-container {
+            border-color: var(--accent);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            color: var(--bg-dark);
+            background: var(--accent);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px var(--accent-glow);
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .menu-item:hover .item-price {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        footer h2 {
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .nav-menu { border-radius: 20px; }
+            .nav-link { padding: 8px 15px; font-size: 0.85rem; }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 2.8rem; }
+            .subtitle-en { font-size: 1rem; letter-spacing: 4px; }
+            .hero-banner { height: 220px; border-radius: 20px; }
+            .tagline { font-size: 1rem; padding: 8px 20px; }
+            .special-offer h2 { font-size: 1.6rem; }
+            .special-offer p { font-size: 1.2rem; }
+            .special-price { font-size: 2.2rem; }
+            .category-card { padding: 15px; }
+            .menu-list { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+            .item-img-container { width: 65px; height: 65px; }
+            .item-name { font-size: 0.85rem; }
+            .item-price { font-size: 0.75rem; padding: 4px 10px; }
+            .badge { font-size: 0.85rem; padding: 8px 15px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <div class="logo-container">
+                <span class="logo-icon">☕</span>
+                <h1>كوفي فينو</h1>
+            </div>
+            <div class="subtitle-en">Coffee Veno</div>
+            
+            <!-- HERO BANNER WITH GRADIENT FADE -->
+            <div class="hero-banner">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=1200" alt="Coffee Shop Vibe">
+                <div class="hero-content">
+                    <div class="tagline">أجواء مميزة.. طعم لا يُنسى ❤️</div>
+                </div>
+            </div>
+
+            <!-- TABBED NAVIGATION MENU -->
+            <nav class="nav-menu">
+                <a class="nav-link active" data-target="all">🏠 الكل</a>
+                <a class="nav-link" data-target="hookah">𖠞༄ النراكيل</a>
+                <a class="nav-link" data-target="drinks">☕ ساخنة وباردة</a>
+                <a class="nav-link" data-target="juices">🍹 عصائر طبيعية</a>
+                <a class="nav-link" data-target="soft">🥤 مشروبات غازية</a>
+                <a class="nav-link" data-target="mexican">🍸 مشروبات مكسيكية</a>
+            </nav>
+
+            <div class="info-badges">
+                <div class="badge">🕒 متواجدين على مدار 24 ساعة</div>
+                <div class="badge">🛵 خدمة التوصيل داخل قضاء شيخان فقط على مدار 24 ساعة</div>
+            </div>
+        </header>
+
+        <!-- Special Offer Section -->
+        <section class="special-offer" id="special-offer">
+            <h2>🔥 العرض المميز</h2>
+            <p>عرض السهرة: نركيلة + فنجانين</p>
+            <div class="special-price">10,000 دينار فقط</div>
+        </section>
+
+        <!-- Menu Grid -->
+        <main class="menu-grid" id="menu-container">
+
+            <!-- 1. Hookah Section -->
+            <article class="category-card" id="hookah">
+                <div class="category-header">
+                    <h3>𖠞༄ قسم النراكيل</h3>
+                </div>
+                <div class="category-hero">
+                    <!-- Updated Hero Image for Hookah Section -->
+                    <img class="category-img" src="https://images.unsplash.com/photo-1729461119836-5ca69e675f70?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1585102842812-53e79e714029?auto=format&fit=crop&q=80&w=800';" alt="نراكيل">
+                </div>
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src=https://images.unsplash.com/photo-1729461119836-5ca69e675f70?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1683833335638-af5f4224857e?q=80&w=728&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';" alt="إنجليزي">
+                            </div>
+                            <span class="item-name">نركيلة إنجليزي</span>
+                        </div>
+                        <span class="item-price">5,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1683833335638-af5f4224857e?q=80&w=728&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1635547821500-77542481940c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';" alt="تفاحتين">
+                            </div>
+                            <span class="item-name">نركيلة تفاحتين</span>
+                        </div>
+                        <span class="item-price">5,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1635547821500-77542481940c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="ليمون">
+                            </div>
+                            <span class="item-name">نركيلة ليمون</span>
+                        </div>
+                        <span class="item-price">5,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1662805522314-d316b95046b1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="ليمون نعناع">
+                            </div>
+                            <span class="item-name">تركية ليمون نعناع</span>
+                        </div>
+                        <span class="item-price">5,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1630175772812-3368aad7982d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="خلطة خاصة">
+                            </div>
+                            <span class="item-name">تركية خلطة خاصة بـ فينو</span>
+                        </div>
+                        <span class="item-price">5,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1593787615221-4f3335b7e93a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="رمان">
+                            </div>
+                            <span class="item-name">تركية طبيعي رمان</span>
+                        </div>
+                        <span class="item-price">6,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1697018934385-4a4421969757?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="ليمون">
+                            </div>
+                            <span class="item-name">تركية طبيعي ليمون</span>
+                        </div>
+                        <span class="item-price">6,000 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1723026568037-e15205e13eab?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1595155414922-86de7873e5fb?auto=format&fit=crop&q=80&w=150';" alt="أناناس">
+                            </div>
+                            <span class="item-name">تركية طبيعي أناناس</span>
+                        </div>
+                        <span class="item-price">7,000 دينار</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 2. Hot & Cold Drinks Section -->
+            <article class="category-card" id="drinks">
+                <div class="category-header">
+                    <h3>☕ المشروبات الساخنة والباردة</h3>
+                </div>
+                <div class="category-hero">
+                    <img class="category-img" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=80&w=800" alt="مشروبات ساخنة وباردة">
+                </div>
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=150" alt="شاي">
+                            </div>
+                            <span class="item-name">شاي</span>
+                        </div>
+                        <span class="item-price">250 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=150" alt="حليب">
+                            </div>
+                            <span class="item-name">حليب عادي</span>
+                        </div>
+                        <span class="item-price">500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://plus.unsplash.com/premium_photo-1671379526961-1aebb82b317b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="شاي حليب">
+                            </div>
+                            <span class="item-name">شاي + حليب</span>
+                        </div>
+                        <span class="item-price">750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&q=80&w=150" alt="كابتشينو">
+                            </div>
+                            <span class="item-name">كابتشينو</span>
+                        </div>
+                        <span class="item-price">750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&q=80&w=150" alt="نسكافية">
+                            </div>
+                            <span class="item-name">نسكافية NESCAFÉ</span>
+                        </div>
+                        <span class="item-price">750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=150" alt="قهوة">
+                            </div>
+                            <span class="item-name">قهوة</span>
+                        </div>
+                        <span class="item-price">1,000 دينار</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 3. Natural Juices Section -->
+            <article class="category-card" id="juices">
+                <div class="category-header">
+                    <h3>🍹 العصائر الطبيعية</h3>
+                </div>
+                <div class="category-hero">
+                    <img class="category-img" src="https://images.unsplash.com/photo-1622597467821-df79dcb4f94d?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="عصائر طبيعية">
+                </div>
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&q=80&w=150" alt="برتقال">
+                            </div>
+                            <span class="item-name">عصير برتقال</span>
+                        </div>
+                        <span class="item-price">1,500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1534336810865-0beae4c81278?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="تفاح">
+                            </div>
+                            <span class="item-name">عصير تفاح</span>
+                        </div>
+                        <span class="item-price">1,500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1707219811295-0f283760668b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="موز">
+                            </div>
+                            <span class="item-name">عصير موز</span>
+                        </div>
+                        <span class="item-price">1,500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1653542772393-71ffa417b1c4?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="ليمون">
+                            </div>
+                            <span class="item-name">عصير ليمون</span>
+                        </div>
+                        <span class="item-price">1,500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://plus.unsplash.com/premium_photo-1676642612947-a518c0a4c99d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="كوكتيل">
+                            </div>
+                            <span class="item-name">عصير كوكتيل</span>
+                        </div>
+                        <span class="item-price">2,000 دينار</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 4. Soft Drinks Section -->
+            <article class="category-card" id="soft">
+                <div class="category-header">
+                    <h3>🥤 المشروبات الغازية</h3>
+                </div>
+                <div class="category-hero">
+                    <img class="category-img" src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=800" alt="مشروبات غازية">
+                </div>
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1629203851122-3726ecdf080e?auto=format&fit=crop&q=80&w=150" alt="بيبسي">
+                            </div>
+                            <span class="item-name">بيبسي</span>
+                        </div>
+                        <span class="item-price">750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTra12L2b2-Z3hhIUDKchJ3QC-QSD_PU5-njGWuJc3NFvlESzBtkBByd_9n&s=10" alt="وايت">
+                            </div>
+                            <span class="item-name">وايت WHITE</span>
+                        </div>
+                        <span class="item-price">1,500 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC_FAP5lKQEactKPa0kj_hzySduUGwiIXFuJgW-lCoZxd7YCFQnD8VTrGz&s=10" alt="بلينغ">
+                            </div>
+                            <span class="item-name">بلينغ PLING</span>
+                        </div>
+                        <span class="item-price">1,250 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk0o80zzCWtUHSxtTbZ8APLAvGzpFHspgJnAEMQbwNXbF21nM_TEnh2LRB&s=10" alt="تايج">
+                            </div>
+                            <span class="item-name">تايج TIGER</span>
+                        </div>
+                        <span class="item-price">1,250 دينار</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- 5. Mexican Drinks Section -->
+            <article class="category-card" id="mexican">
+                <div class="category-header">
+                    <h3>🍸 المشروبات المكسيكية</h3>
+                </div>
+                <div class="category-hero">
+                    <img class="category-img" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&q=80&w=800" alt="مشروبات مكسيكية">
+                </div>
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxODBM3MUMR_FWy3jLuBBVmfcGUtBHXN-w0vxUv5My_yrQpf_-eN1uMK8&s=10" alt="تايج مكسيكي">
+                            </div>
+                            <span class="item-name">تايج مكسيكي</span>
+                        </div>
+                        <span class="item-price">1,750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxNEHZx_fEn_6dqS1GA6Jdhpsc6zooLkQ2_oMVHgTTmolrTdTDtPVBVcq9&s=10" alt="وايت مكسيكي">
+                            </div>
+                            <span class="item-name">وايت مكسيكي</span>
+                        </div>
+                        <span class="item-price">1,750 دينار</span>
+                    </li>
+                    <li class="menu-item">
+                        <div class="item-details">
+                            <div class="item-img-container">
+                                <img class="item-img" src="https://images.unsplash.com/photo-1663955706695-de874fa93c4d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="بلينغ مكسيكي رمان">
+                            </div>
+                            <span class="item-name">بلينغ مكسيكي رمان</span>
+                        </div>
+                        <span class="item-price">1,750 دينار</span>
+                    </li>
+                </ul>
+            </article>
+
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <h2>كوفي فينو ❤️</h2>
+            <p>أجواء مميزة.. طعم لا يُنسى</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Tabbed Navigation & Special Offer Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const categoryCards = document.querySelectorAll('.category-card');
+            const menuGrid = document.getElementById('menu-container');
+            const specialOffer = document.getElementById('special-offer');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 1. Handle Active State on Navigation
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // 2. Get the target section ID
+                    const targetId = this.getAttribute('data-target');
+
+                    // 3. Show/Hide Special Offer based on target
+                    if (targetId === 'all' || targetId === 'hookah') {
+                        specialOffer.style.display = 'block';
+                        specialOffer.style.animation = 'none';
+                        specialOffer.offsetHeight; 
+                        specialOffer.style.animation = 'glow-pulse 3s infinite alternate';
+                    } else {
+                        specialOffer.style.display = 'none';
+                    }
+
+                    // 4. Show/Hide Menu Sections
+                    if (targetId === 'all') {
+                        menuGrid.classList.remove('single-view');
+                        categoryCards.forEach(card => {
+                            card.classList.remove('hidden');
+                        });
+                    } else {
+                        menuGrid.classList.add('single-view');
+                        categoryCards.forEach(card => {
+                            if (card.id === targetId) {
+                                card.classList.remove('hidden');
+                                // Trigger animation restart
+                                card.style.animation = 'none';
+                                card.offsetHeight; // Trigger reflow
+                                card.style.animation = 'fadeIn 0.5s ease forwards';
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    }
+
+                    // 5. Smoothly scroll up to the menu section
+                    menuGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
